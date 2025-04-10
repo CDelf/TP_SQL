@@ -1,0 +1,30 @@
+CREATE DATABASE IF NOT EXISTS compta;
+USE compta;
+
+CREATE TABLE Article(
+    Id INT(11) PRIMARY KEY,
+    Ref VARCHAR(13) NOT NULL,
+    Designation VARCHAR(255),
+    Prix DECIMAL(7,2)),
+    Id_Fou INT FOREIGN KEY REFERENCES Fournisseur(Id)
+    );
+
+CREATE TABLE Fournisseur(
+    Id INT(11) PRIMARY KEY,
+    Nom VARCHAR(30) NOT NULL
+    );
+
+CREATE TABLE Bon(
+    Id INT(11) PRIMARY KEY,
+    Numero int(10),
+    Date_cmd DATE DEFAULT CURRENT_DATE ON UPDATE CURRENT_DATE,
+    Delai INT(11),
+    Id_Fou INT FOREIGN KEY REFERENCES Fournisseur(Id)
+);
+
+CREATE TABLE Compo(
+    Id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    Qte INT(5),
+    Id_Art INT FOREIGN KEY REFERENCES Article,
+    Id_Bon INT FOREIGN KEY REFERENCES Bon;
+);
